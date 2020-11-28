@@ -1,8 +1,9 @@
 package com.cass.aws.upload.awsConfig;
 
-import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@Service
+@Configuration
 public class BucketConfig {
 
     private final String BucketName;
@@ -13,10 +14,12 @@ public class BucketConfig {
         this.AwsFolderPathName = "testing";
     }
 
+    @Bean
     public String getBucketName() {
         return BucketName;
     }
 
+    @Bean
     public String getAwsFolderPathName() {
         return AwsFolderPathName;
     }
