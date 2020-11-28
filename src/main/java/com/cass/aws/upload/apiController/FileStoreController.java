@@ -36,8 +36,14 @@ public class FileStoreController {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
         String fileName = String.format("%s_%s", dateFormatter.format(new Date()), file.getOriginalFilename());;
 
-        return ResponseEntity.status(HttpStatus.OK).body(Map.of("resourceUrl",
-                fileStoreService.awsS3UploadFile(fileName, Optional.of(metadata), file)));
+        final String response = fileStoreService.awsS3UploadFile(fileName, Optional.of(metadata), file);
+        if(response.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("message", "failed to store file to s3 Bucket"));
+        }
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(Map.of("resourceUrl",
+                        fileStoreService.awsS3UploadFile(fileName, Optional.of(metadata), file)));
 
     }
 }
