@@ -47,8 +47,10 @@ public class AwsFileStoreService implements IFilesStoreService {
             s3.putObject(new PutObjectRequest(String.format("%s/%s", bucket, filePath), fileName, inputStream, metadata)
                     .withCannedAcl(CannedAccessControlList.PublicRead));
         } catch (AmazonServiceException | IOException e) {
-            throw new IllegalStateException("failed to store file to s3 Bucket", e);
+            e.printStackTrace();
+            return null;
         }
+
 
         return s3.getUrl(bucket, String.format("%s/%s", filePath, fileName)).toString();
     }

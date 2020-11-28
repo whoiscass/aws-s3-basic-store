@@ -14,8 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import java.io.IOException;
-
 @RestController
 @RequestMapping("api/v1")
 public class FileStoreController {
@@ -37,12 +35,14 @@ public class FileStoreController {
         String fileName = String.format("%s_%s", dateFormatter.format(new Date()), file.getOriginalFilename());;
 
         final String response = fileStoreService.awsS3UploadFile(fileName, Optional.of(metadata), file);
-        if(response.isEmpty()) {
+
+        if(response == null || response.isEmpty()) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("message", "failed to store file to s3 Bucket"));
         }
+
         return ResponseEntity.status(HttpStatus.OK)
-                .body(Map.of("resourceUrl",
+                .body(Map.of("response",
                         fileStoreService.awsS3UploadFile(fileName, Optional.of(metadata), file)));
 
     }
