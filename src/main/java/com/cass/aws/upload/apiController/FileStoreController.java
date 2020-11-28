@@ -29,18 +29,15 @@ public class FileStoreController {
     @PostMapping(path = "aws-s3/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> upload(@RequestParam("file") MultipartFile file) {
 
-        String resourceUrl = null;
-
         Map<String, String> metadata = new HashMap<>();
         metadata.put("Content-type", file.getContentType());
         metadata.put("Content-length", String.valueOf(file.getSize()));
 
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
-        String fileName = String.format("%s_%s", dateFormatter.format(new Date()), file.getOriginalFilename());
+        String fileName = String.format("%s_%s", dateFormatter.format(new Date()), file.getOriginalFilename());;
 
-        resourceUrl = fileStoreService.awsS3UploadFile(fileName, Optional.of(metadata), file);
-
-        return ResponseEntity.status(HttpStatus.OK).body(Map.of("resourceUrl", resourceUrl));
+        return ResponseEntity.status(HttpStatus.OK).body(Map.of("resourceUrl",
+                fileStoreService.awsS3UploadFile(fileName, Optional.of(metadata), file)));
 
     }
 }
