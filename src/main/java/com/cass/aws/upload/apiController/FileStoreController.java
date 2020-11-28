@@ -38,11 +38,7 @@ public class FileStoreController {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
         String fileName = String.format("%s_%s", dateFormatter.format(new Date()), file.getOriginalFilename());
 
-        try {
-            resourceUrl = fileStoreService.awsS3UploadFile(fileName, Optional.of(metadata), file.getInputStream());
-        } catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
+        resourceUrl = fileStoreService.awsS3UploadFile(fileName, Optional.of(metadata), file);
 
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("resourceUrl", resourceUrl));
 

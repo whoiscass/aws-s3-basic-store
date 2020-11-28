@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cass</groupId>
-	<artifactId>upload</artifactId>
+	<artifactId>aws-s3-file-uploader</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>upload</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Basic AWS s3 file uploader</name>
+	<description>Basic Spring app to store files on AWS-s3</description>
 
 	<properties>
 		<java.version>11</java.version>
