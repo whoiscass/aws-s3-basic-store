@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface IFilesStoreService {
-    public String uploadFile(String fileName,
+    String uploadFile(String fileName,
                              Optional<Map<String,String>> optionalMetadata,
                              InputStream inputStream);
 }
