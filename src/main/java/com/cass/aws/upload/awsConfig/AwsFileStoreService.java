@@ -36,8 +36,8 @@ public class AwsFileStoreService implements IFilesStoreService {
             }
         });
 
-        final String bucket =  BucketConfig.AWS_BUCKET_NAME.getBucketName();
-        final String filePath =  BucketConfig.AWS_FOLDER_PATH_NAME.getAwsFolderPathName();
+        final String bucket =  BucketConfig.AWS_BUCKET_NAME.getValue();
+        final String filePath =  BucketConfig.AWS_FOLDER_PATH_NAME.getValue();
 
         try {
             final InputStream inputStream = file.getInputStream();

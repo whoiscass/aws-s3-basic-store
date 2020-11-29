@@ -9,9 +9,7 @@ public enum BucketConfig {
 
     BucketConfig(String value) { this.value = value; }
 
-    public String getBucketName() {
+    public String getValue() {
         return value;
     }
-
-    public String getAwsFolderPathName() { return value; }
 }
