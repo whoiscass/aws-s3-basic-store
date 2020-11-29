@@ -20,11 +20,8 @@ public class AwsFileStoreService implements IFilesStoreService {
 
     @Autowired private final AmazonS3 s3;
 
-    @Autowired private final BucketConfig bucketConfig;
-
-    AwsFileStoreService(AmazonS3 s3, BucketConfig bucketConfig) {
+    AwsFileStoreService(AmazonS3 s3) {
         this.s3 = s3;
-        this.bucketConfig = bucketConfig;
     }
 
     @Override
@@ -39,8 +36,8 @@ public class AwsFileStoreService implements IFilesStoreService {
             }
         });
 
-        final String bucket =  bucketConfig.getBucketName();
-        final String filePath =  bucketConfig.getAwsFolderPathName();
+        final String bucket =  BucketConfig.AWS_BUCKET_NAME.getBucketName();
+        final String filePath =  BucketConfig.AWS_FOLDER_PATH_NAME.getAwsFolderPathName();
 
         try {
             final InputStream inputStream = file.getInputStream();

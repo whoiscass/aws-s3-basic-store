@@ -1,26 +1,17 @@
 package com.cass.aws.upload.awsConfig;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+public enum BucketConfig {
 
-@Configuration
-public class BucketConfig {
+    AWS_BUCKET_NAME("aws-java-storage"),
+    AWS_FOLDER_PATH_NAME("testing");
 
-    private final String BucketName;
-    private final String AwsFolderPathName;
+    private String value;
 
-    BucketConfig() {
-        this.BucketName = "aws-java-storage";
-        this.AwsFolderPathName = "testing";
-    }
+    BucketConfig(String value) { this.value = value; }
 
-    @Bean
     public String getBucketName() {
-        return BucketName;
+        return value;
     }
 
-    @Bean
-    public String getAwsFolderPathName() {
-        return AwsFolderPathName;
-    }
+    public String getAwsFolderPathName() { return value; }
 }
