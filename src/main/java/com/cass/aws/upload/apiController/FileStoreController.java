@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,8 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("api/v1")
+@Service
 public class FileStoreController {
 
     @Autowired private final FileStoreService fileStoreService;
@@ -24,7 +24,6 @@ public class FileStoreController {
         this.fileStoreService = fileStoreService;
     }
 
-    @PostMapping(path = "aws-s3/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> upload(@RequestParam("file") MultipartFile file) {
 
         Map<String, String> metadata = new HashMap<>();
